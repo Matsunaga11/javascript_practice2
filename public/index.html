@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<title>はじめてのVue.js</title>
+<script src="https://unpkg.com/vue@2.5.17"></script>
+
+<div id="app">
+  <h1>
+    {{ title }}
+  </h1>
+　<input type="checkbox">すべて</input>
+  <input type="checkbox">作業中</input>
+  <input type="checkbox">完了</input>
+  <table>
+    <colgroup>
+      <col style="width: 70px;"/>
+      <col style="width: 70px;"/>
+      <col style="width: 70px;"/>
+    </colgroup>
+    <thead>
+      <tr>
+        <th><div>id</div></th>
+        <th><div>コメント</div></th>
+        <th><div>状態</div></th>
+      </tr>
+    </thead>
+  </table>
+  <h2>新規タスクの追加</h2>
+ 　<input type="text" name="answear">
+  <button type="button">追加</button>
+
+</div>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      title: 'ToDoリスト'
+    }
+  });
+</script>
