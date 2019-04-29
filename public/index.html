@@ -22,17 +22,39 @@
         <th><div>状態</div></th>
       </tr>
     </thead>
+    <tbody>
+　　<tr v-for="todo in todoListSet" v-bind:key=todo.comment>
+　　  <td>{{ todo.id }}</td>
+　　  <td>{{ todo.comment }}</td>
+　　  <td>{{ todo.condition }}</td>
+　　</tr>
   </table>
   <h2>新規タスクの追加</h2>
- 　<input type="text" name="answear">
-  <button type="button">追加</button>
+
+ <input type="text"/>
+ <button @click="addTodo($event)">追加</button>
 
 </div>
 <script>
-  new Vue({
-    el: '#app',
-    data: {
-      title: 'ToDoリスト'
+var todoListSet = [];
+//
+// Vue.component('todo', {
+//   // props: {
+//   //   todoList: {}
+//   // },
+//   template: '<div>{{ todoList }}</div>'
+// })
+
+new Vue({
+  el: '#app',
+  data: {
+    title: 'ToDoリスト',
+    todoListSet: todoListSet
+  },
+  methods: {
+    addTodo: function($event) {
+      todoListSet.push({id: 3, comment: 'ccc', condition: '作業中'});
     }
-  });
+  }
+});
 </script>
