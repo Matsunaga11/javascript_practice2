@@ -26,14 +26,14 @@
 　　<tr v-for="todo in todoListSet" v-bind:key=todo.comment>
 　　  <td>{{ todo.id }}</td>
 　　  <td>{{ todo.comment }}</td>
-　　  <td>{{ todo.condition }}</td>
+　　  <td @click="toggleCondition($event)"><button>{{ todo.condition }}</button></td>
 　　</tr>
   </table>
   <h2>新規タスクの追加</h2>
 
 
  <input type="text" v-model="input">
- <button @click="addTodo($event)">追加</button>
+ <button @click="addTodo">追加</button>
 
 </div>
 <script>
@@ -46,8 +46,15 @@ new Vue({
     input: ""
   },
   methods: {
-    addTodo: function($event) {
+    addTodo: function() {
       todoListSet.push({id: this.todoListSet.length + 1, comment: this.input, condition: '作業中'});
+    },
+    toggleCondition: function($event){
+      if( event.target.innerHTML === '作業中') {
+        event.target.innerHTML = '完了';
+      } else {
+        event.target.innerHTML = '作業中';
+      }
     }
   }
 });
