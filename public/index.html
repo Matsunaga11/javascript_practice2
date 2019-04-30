@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-　　<tr id="todo" v-for="todo in todoListSet" v-if=todo.alive v-bind:key=todo.comment>
+　　<tr id="todo" v-for="todo in todoListSet" v-if=todo.remain v-bind:key=todo.comment>
 　　  <td>{{ todo.id }}</td>
 　　  <td>{{ todo.comment }}</td>
 　　  <td v-bind:style="buttonStyle">
@@ -36,7 +36,7 @@
 
 
  <input type="text" v-model="input">
- <button @click="addTodo">追加</button>
+ <button @click="addTodo($event)">追加</button>
 
 </div>
 <script>
@@ -52,8 +52,9 @@ new Vue({
     }
   },
   methods: {
-    addTodo: function() {
-      todoListSet.push({id: this.todoListSet.length + 1, comment: this.input, condition: '作業中', alive: true});
+    addTodo: function($event) {
+      todoListSet.push({id: this.todoListSet.length + 1, comment: this.input, condition: '作業中', remain: true});
+      this.input="";
     },
     toggleCondition: function($event){
       if( $event.target.innerHTML === '作業中') {
@@ -66,7 +67,7 @@ new Vue({
 　　   var target = $event.target.parentNode.parentNode;
       var todoId = target.getElementsByTagName("td")[0].textContent;
       var targetTodo = this.todoListSet.find((todo) => todo.id === parseInt(todoId, 10));
-      targetTodo.alive = false;
+      targetTodo.remain = false;
     }
   }
 });
