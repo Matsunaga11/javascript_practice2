@@ -58,12 +58,12 @@ new Vue({
   methods: {
     addTodo: function($event) {
       todoListSet.push({
-                        id: this.todoListSet.length + 1,
-                        comment: this.input,
-                        condition: '作業中',
-                        remain: true,
-                        visible: true
-                      });
+        id: this.todoListSet.length + 1,
+        comment: this.input,
+        condition: '作業中',
+        remain: true,
+        visible: true
+      });
       this.input="";
     },
     toggleCondition: function($event){
