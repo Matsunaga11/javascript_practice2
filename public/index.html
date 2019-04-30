@@ -13,7 +13,7 @@
     <colgroup>
       <col style="width: 70px;"/>
       <col style="width: 70px;"/>
-      <col style="width: 70px;"/>
+      <col style="width: 100px;"/>
     </colgroup>
     <thead>
       <tr>
@@ -23,10 +23,13 @@
       </tr>
     </thead>
     <tbody>
-　　<tr v-for="todo in todoListSet" v-bind:key=todo.comment>
+　　<tr id="todo" v-for="todo in todoListSet" v-if=todo.alive v-bind:key=todo.comment>
 　　  <td>{{ todo.id }}</td>
 　　  <td>{{ todo.comment }}</td>
-　　  <td @click="toggleCondition($event)"><button>{{ todo.condition }}</button></td>
+　　  <td v-bind:style="buttonStyle">
+  　　  <button @click="toggleCondition($event)">{{ todo.condition }}</button>
+       <button @click="deleteTodo($event)">削除</button>
+     </td>
 　　</tr>
   </table>
   <h2>新規タスクの追加</h2>
@@ -43,18 +46,27 @@ new Vue({
   data: {
     title: 'ToDoリスト',
     todoListSet: todoListSet,
-    input: ""
+    input: "",
+    buttonStyle: {
+      display: 'flex'
+    }
   },
   methods: {
     addTodo: function() {
-      todoListSet.push({id: this.todoListSet.length + 1, comment: this.input, condition: '作業中'});
+      todoListSet.push({id: this.todoListSet.length + 1, comment: this.input, condition: '作業中', alive: true});
     },
     toggleCondition: function($event){
-      if( event.target.innerHTML === '作業中') {
-        event.target.innerHTML = '完了';
+      if( $event.target.innerHTML === '作業中') {
+        $event.target.innerHTML = '完了';
       } else {
-        event.target.innerHTML = '作業中';
+        $event.target.innerHTML = '作業中';
       }
+    },
+    deleteTodo: function($event) {
+　　   var target = $event.target.parentNode.parentNode;
+      var todoId = target.getElementsByTagName("td")[0].textContent;
+      var targetTodo = this.todoListSet.find((todo) => todo.id === parseInt(todoId, 10));
+      targetTodo.alive = false;
     }
   }
 });
