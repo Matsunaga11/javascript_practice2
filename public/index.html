@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-　　<tr id="todo" v-for="todo in todoListSet" v-show=todo.visible v-if=todo.remain v-bind:key=todo.comment>
+　　<tr id="todo" v-for="todo in todoListSet" v-show=todo.visible v-if=todo.remain v-bind:key=todo.id>
 　　  <td>{{ todo.id }}</td>
 　　  <td>{{ todo.comment }}</td>
 　　  <td :style="buttonWrapper">
