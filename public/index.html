@@ -31,29 +31,23 @@
   </table>
   <h2>新規タスクの追加</h2>
 
- <input type="text"/>
+
+ <input type="text" v-model="input">
  <button @click="addTodo($event)">追加</button>
 
 </div>
 <script>
 var todoListSet = [];
-//
-// Vue.component('todo', {
-//   // props: {
-//   //   todoList: {}
-//   // },
-//   template: '<div>{{ todoList }}</div>'
-// })
-
 new Vue({
   el: '#app',
   data: {
     title: 'ToDoリスト',
-    todoListSet: todoListSet
+    todoListSet: todoListSet,
+    input: ""
   },
   methods: {
     addTodo: function($event) {
-      todoListSet.push({id: 3, comment: 'ccc', condition: '作業中'});
+      todoListSet.push({id: this.todoListSet.length + 1, comment: this.input, condition: '作業中'});
     }
   }
 });
