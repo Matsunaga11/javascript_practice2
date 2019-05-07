@@ -7,7 +7,7 @@
 
 <div id="app">
   <h1>
-    {{ title }}
+    ToDoリスト
   </h1>
 　<input type="radio" name="picked" value="all" v-model="picked"　@click="filterTodo('all')">すべて</input>
   <input type="radio" name="picked" value="progress" v-model="picked" @click="filterTodo('inProgress')">作業中</input>
@@ -20,9 +20,9 @@
     </colgroup>
     <thead>
       <tr>
-        <th><div>id</div></th>
-        <th><div>コメント</div></th>
-        <th><div>状態</div></th>
+        <th>id</th>
+        <th>コメント</th>
+        <th>状態</th>
       </tr>
     </thead>
     <tbody>

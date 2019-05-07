@@ -1,15 +1,13 @@
-var todoListSet = [];
 new Vue({
   el: '#app',
   data: {
-    title: 'ToDoリスト',
-    todoListSet: todoListSet,
+    todoListSet: [],
     input: "",
     picked: 'all'
   },
   methods: {
     addTodo: function($event) {
-      todoListSet.push({
+      this.todoListSet.push({
         id: this.todoListSet.length + 1,
         comment: this.input,
         condition: '作業中',
@@ -27,7 +25,6 @@ new Vue({
       } else {
         targetTodo.condition = '作業中';
       }
-
     },
     deleteTodo: function($event) {
 　　   var target = $event.target.parentNode.parentNode;
