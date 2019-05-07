@@ -16,21 +16,16 @@ new Vue({
       });
       this.input="";
     },
-    toggleCondition: function($event){
-      var target = $event.target.parentNode.parentNode;
-      var todoId = target.getElementsByTagName("td")[0].textContent;
-      var targetTodo = this.todoListSet.find((todo) => todo.id === parseInt(todoId, 10));
-      if( $event.target.innerHTML === '作業中') {
-        targetTodo.condition = '完了';
+    toggleCondition: function(todo){
+      if( todo.condition === '作業中') {
+        todo.condition = '完了';
       } else {
-        targetTodo.condition = '作業中';
+        todo.condition = '作業中';
       }
     },
-    deleteTodo: function($event) {
-　　   var target = $event.target.parentNode.parentNode;
-      var todoId = target.getElementsByTagName("td")[0].textContent;
-      var targetTodo = this.todoListSet.find((todo) => todo.id === parseInt(todoId, 10));
-      targetTodo.remain = false;
+    deleteTodo: function(todo) {
+      var index = this.todoListSet.indexOf(todo);
+      this.todoListSet.splice(index, 1);
     },
     filterTodo: function(filterCondition) {
       var inProgress = this.todoListSet.filter(function(value) {

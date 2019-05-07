@@ -30,8 +30,8 @@
 　　  <td>{{ todo.id }}</td>
 　　  <td>{{ todo.comment }}</td>
 　　  <td class="buttonWrapper">
-  　　  <button @click="toggleCondition($event)">{{ todo.condition }}</button>
-       <button class="deleteButton" @click="deleteTodo($event)">削除</button>
+  　　  <button @click="toggleCondition(todo)">{{ todo.condition }}</button>
+       <button class="deleteButton" @click="deleteTodo(todo)">削除</button>
      </td>
 　　</tr>
   </table>
