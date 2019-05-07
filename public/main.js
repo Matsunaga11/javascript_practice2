@@ -3,57 +3,42 @@ new Vue({
   data: {
     todoListSet: [],
     input: "",
-    picked: 'all'
+    options: [
+      { value: -1, label: 'すべて' },
+      { value: 0,  label: '作業中' },
+      { value: 1,  label: '完了' }
+    ],
+    current: -1
   },
   methods: {
     addTodo: function($event) {
       this.todoListSet.push({
         id: this.todoListSet.length + 1,
         comment: this.input,
-        condition: '作業中',
+        state: 0,
         remain: true,
         visible: true
       });
       this.input="";
     },
     toggleCondition: function(todo){
-      if( todo.condition === '作業中') {
-        todo.condition = '完了';
-      } else {
-        todo.condition = '作業中';
-      }
+      todo.state = todo.state ? 0 : 1
     },
     deleteTodo: function(todo) {
       var index = this.todoListSet.indexOf(todo);
       this.todoListSet.splice(index, 1);
-    },
-    filterTodo: function(filterCondition) {
-      var inProgress = this.todoListSet.filter(function(value) {
-        return value.condition ==='作業中';
-      });
-      var done = this.todoListSet.filter(function(value) {
-        return value.condition ==='完了';
-      });
-
-      if (filterCondition === 'inProgress') {
-        inProgress.forEach(function(value) {
-          value.visible = true;
-        });
-        done.forEach(function(value) {
-          value.visible = false;
-        });
-      } else if (filterCondition === 'done') {
-        inProgress.forEach(function(value) {
-          value.visible = false;
-        });
-        done.forEach(function(value) {
-          value.visible = true;
-        });
-      } else {
-        this.todoListSet.forEach(function(value) {
-          value.visible = true;
-        })
-      }
     }
+  },
+  computed: {
+    computedTodos: function() {
+      return this.todoListSet.filter(function(todo) {
+        return this.current < 0 ? true : this.current === todo.state
+      }, this)
+    },
+    labels: function() {
+      return this.options.reduce(function(optionSet, option) {
+        return Object.assign(optionSet, { [option.value]: option.label })
+      }, {})
+  　}
   }
 });

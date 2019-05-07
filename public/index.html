@@ -9,9 +9,10 @@
   <h1>
     ToDoリスト
   </h1>
-　<input type="radio" name="picked" value="all" v-model="picked"　@click="filterTodo('all')">すべて</input>
-  <input type="radio" name="picked" value="progress" v-model="picked" @click="filterTodo('inProgress')">作業中</input>
-  <input type="radio" name="picked" value="done" v-model="picked" @click="filterTodo('done')">完了</input>
+  <label v-for="label in options">
+    <input type="radio" v-model="current" v-bind:value="label.value">
+    {{label.label}}
+  </label>
   <table>
     <colgroup>
       <col style="width: 70px;"/>
@@ -26,11 +27,11 @@
       </tr>
     </thead>
     <tbody>
-　　<tr id="todo" v-for="todo in todoListSet" v-show=todo.visible v-if=todo.remain v-bind:key=todo.id>
+　　<tr id="todo" v-for="todo in computedTodos" v-show=todo.visible v-if=todo.remain v-bind:key=todo.id>
 　　  <td>{{ todo.id }}</td>
 　　  <td>{{ todo.comment }}</td>
 　　  <td class="buttonWrapper">
-  　　  <button @click="toggleCondition(todo)">{{ todo.condition }}</button>
+  　　  <button @click="toggleCondition(todo)">{{ labels[todo.state]  }}</button>
        <button class="deleteButton" @click="deleteTodo(todo)">削除</button>
      </td>
 　　</tr>
