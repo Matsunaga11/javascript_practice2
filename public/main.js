@@ -11,7 +11,7 @@ new Vue({
     current: -1
   },
   methods: {
-    addTodo: function($event) {
+    addTodo: function() {
       this.todoListSet.push({
         id: this.todoListSet.length + 1,
         comment: this.input,
