@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+  <title>はじめてのVue.js</title>
+  <script src="https://unpkg.com/vue@2.5.17"></script>
+  <link rel="stylesheet" type="text/css" href="./main.css">
+</head>
+
+<div id="app">
+  <h1>
+    ToDoリスト
+  </h1>
+  <label v-for="label in options">
+    <input type="radio" v-model="current" v-bind:value="label.value">
+    {{label.label}}
+  </label>
+  <table>
+    <colgroup>
+      <col style="width: 70px;"/>
+      <col style="width: 70px;"/>
+      <col style="width: 100px;"/>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>コメント</th>
+        <th>状態</th>
+      </tr>
+    </thead>
+    <tbody>
+　　<tr id="todo" v-for="todo in computedTodos" v-show=todo.visible v-if=todo.remain v-bind:key=todo.id>
+　　  <td>{{ todo.id }}</td>
+　　  <td>{{ todo.comment }}</td>
+　　  <td class="buttonWrapper">
+  　　  <button @click="toggleCondition(todo)">{{ labels[todo.state]  }}</button>
+       <button class="deleteButton" @click="deleteTodo(todo)">削除</button>
+     </td>
+　　</tr>
+  </table>
+  <h2>新規タスクの追加</h2>
+ <input type="text" v-model="input">
+ <button @click="addTodo($event)">追加</button>
+</div>
+<script type="text/javascript" src="./main.js"></script>
